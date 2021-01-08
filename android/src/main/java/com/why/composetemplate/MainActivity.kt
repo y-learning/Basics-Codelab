@@ -4,8 +4,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -27,7 +29,12 @@ fun Greeting(name: String) {
 
 @Composable
 fun Counter(count: Int, updateCount: (Int) -> Unit) {
-    Button(onClick = { updateCount(count.inc()) }) {
+    Button(
+        onClick = { updateCount(count.inc()) },
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = if (count > 3) Color.Green else Color.DarkGray
+        )
+    ) {
         Text("I've been clicked $count times")
     }
 }
@@ -41,12 +48,14 @@ fun RowItem(modifier: Modifier = Modifier, content: @Composable () -> Unit) {
 
 @Composable
 fun MyScreenContent(names: List<String> = listOf("Android", "Compose")) {
-    Column {
-        for (name in names) {
-            RowItem {
-                Greeting(name)
+    Column(modifier = Modifier.fillMaxHeight()) {
+        Column(modifier = Modifier.weight(1f)) {
+            for (name in names) {
+                RowItem {
+                    Greeting(name)
+                }
+                Divider()
             }
-            Divider()
         }
         RowItem(modifier = Modifier.align(alignment = CenterHorizontally)) {
             val countState = remember { mutableStateOf(0) }
@@ -58,10 +67,12 @@ fun MyScreenContent(names: List<String> = listOf("Android", "Compose")) {
     }
 }
 
+val GoldColor = Color(255, 215, 0)
+
 @Composable
 fun MyApp(content: @Composable () -> Unit) {
     MaterialTheme {
-        Surface(color = Color.Cyan) {
+        Surface(color = GoldColor) {
             content()
         }
     }
