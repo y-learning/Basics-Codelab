@@ -1,7 +1,5 @@
-Jetpack Compose Template
+Jetpack Compose basics code lab
 =========
-
-Up-To-Date Android Jetpack Compose template with *Kotlin* as the build script language.
 
 #### Dependencies:
 
