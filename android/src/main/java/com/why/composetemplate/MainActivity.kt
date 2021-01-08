@@ -33,7 +33,7 @@ fun Counter(count: Int, updateCount: (Int) -> Unit) {
     Button(
         onClick = { updateCount(count.inc()) },
         colors = ButtonDefaults.buttonColors(
-            backgroundColor = if (count > 3) Color.Green else Color.DarkGray
+            backgroundColor = if (count > 3) Color.Green else Color.LightGray
         )
     ) {
         Text("I've been clicked $count times")
@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            MyApp { Greeting(name = "Android") }
+            MyApp { MyScreenContent() }
         }
     }
 }
