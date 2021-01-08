@@ -3,6 +3,7 @@ package com.why.composetemplate
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -14,23 +15,31 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun Greeting(name: String) {
-    Surface(color = Color.Cyan) {
-        Text(text = "Hello $name!", modifier = Modifier.padding(24.dp))
+    Text(text = "Hello $name!", modifier = Modifier.padding(24.dp))
+}
+
+@Composable
+fun MyApp() {
+    MaterialTheme {
+        Surface(color = Color.Cyan) {
+            Greeting(name = "Android")
+        }
     }
 }
 
-@Preview(showBackground = true, name = "Preview Greeting")
+@Preview(showBackground = true, name = "Preview MyApp")
 @Composable
 fun DefaultPreview() {
-    Greeting(name = "Jetpack Compose")
+    MyApp()
 }
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
-            Greeting("Android 11")
+            MyApp()
         }
     }
 }
