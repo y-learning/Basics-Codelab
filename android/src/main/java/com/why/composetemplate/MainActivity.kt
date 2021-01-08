@@ -26,11 +26,9 @@ fun Greeting(name: String) {
 }
 
 @Composable
-fun Counter() {
-    val count = remember { mutableStateOf(0) }
-
-    Button(onClick = { count.value++ }) {
-        Text("I've been clicked ${count.value} times")
+fun Counter(count: Int, updateCount: (Int) -> Unit) {
+    Button(onClick = { updateCount(count.inc()) }) {
+        Text("I've been clicked $count times")
     }
 }
 
@@ -51,7 +49,11 @@ fun MyScreenContent(names: List<String> = listOf("Android", "Compose")) {
             Divider()
         }
         RowItem(modifier = Modifier.align(alignment = CenterHorizontally)) {
-            Counter()
+            val countState = remember { mutableStateOf(0) }
+
+            Counter(countState.value) { newCount ->
+                countState.value = newCount
+            }
         }
     }
 }
