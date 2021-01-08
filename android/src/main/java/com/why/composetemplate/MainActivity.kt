@@ -19,18 +19,18 @@ fun Greeting(name: String) {
 }
 
 @Composable
-fun MyApp() {
+fun MyApp(content: @Composable () -> Unit) {
     MaterialTheme {
         Surface(color = Color.Cyan) {
-            Greeting(name = "Android")
+            content()
         }
     }
 }
 
-@Preview(showBackground = true, name = "Preview MyApp")
+@Preview(showBackground = true, name = "Preview MyApp Composable")
 @Composable
 fun DefaultPreview() {
-    MyApp()
+    MyApp { Greeting(name = "Android 11") }
 }
 
 class MainActivity : AppCompatActivity() {
@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            MyApp()
+            MyApp { Greeting(name = "Android") }
         }
     }
 }
