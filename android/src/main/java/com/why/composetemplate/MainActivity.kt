@@ -21,10 +21,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.why.composetemplate.theme.MyMaterialTheme
 
 @Composable
 fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+    Text(text = "Hello $name!", style = MaterialTheme.typography.h4)
 }
 
 @Composable
@@ -71,7 +72,7 @@ val GoldColor = Color(255, 215, 0)
 
 @Composable
 fun MyApp(content: @Composable () -> Unit) {
-    MaterialTheme {
+    MyMaterialTheme {
         Surface(color = GoldColor) {
             content()
         }
