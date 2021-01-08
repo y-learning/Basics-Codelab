@@ -4,11 +4,14 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Button
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.setContent
@@ -21,11 +24,11 @@ fun Greeting(name: String) {
 }
 
 @Composable
-fun MyApp(content: @Composable () -> Unit) {
-    MaterialTheme {
-        Surface(color = Color.Cyan) {
-            content()
-        }
+fun Counter() {
+    val count = remember { mutableStateOf(0) }
+
+    Button(onClick = { count.value++ }) {
+        Text("I've been clicked ${count.value} times")
     }
 }
 
@@ -35,6 +38,16 @@ fun MyScreenContent(names: List<String> = listOf("Android", "Compose")) {
         for (name in names) {
             Greeting(name)
             Divider()
+        }
+        Counter()
+    }
+}
+
+@Composable
+fun MyApp(content: @Composable () -> Unit) {
+    MaterialTheme {
+        Surface(color = Color.Cyan) {
+            content()
         }
     }
 }
