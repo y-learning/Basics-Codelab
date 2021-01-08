@@ -2,7 +2,9 @@ package com.why.composetemplate
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -27,10 +29,20 @@ fun MyApp(content: @Composable () -> Unit) {
     }
 }
 
-@Preview(showBackground = true, name = "Preview MyApp Composable")
+@Composable
+fun MyScreenContent(names: List<String> = listOf("Android", "Compose")) {
+    Column {
+        for (name in names) {
+            Greeting(name)
+            Divider()
+        }
+    }
+}
+
+@Preview(showBackground = true, name = "Preview MyApp")
 @Composable
 fun DefaultPreview() {
-    MyApp { Greeting(name = "Android 11") }
+    MyApp { MyScreenContent() }
 }
 
 class MainActivity : AppCompatActivity() {
