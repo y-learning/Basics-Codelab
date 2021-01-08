@@ -3,6 +3,7 @@ package com.why.composetemplate
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.Divider
@@ -12,6 +13,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.setContent
@@ -20,7 +22,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun Greeting(name: String) {
-    Text(text = "Hello $name!", modifier = Modifier.padding(24.dp))
+    Text(text = "Hello $name!")
 }
 
 @Composable
@@ -33,13 +35,24 @@ fun Counter() {
 }
 
 @Composable
+fun RowItem(modifier: Modifier = Modifier, content: @Composable () -> Unit) {
+    Row(modifier = modifier.padding(16.dp)) {
+        content()
+    }
+}
+
+@Composable
 fun MyScreenContent(names: List<String> = listOf("Android", "Compose")) {
     Column {
         for (name in names) {
-            Greeting(name)
+            RowItem {
+                Greeting(name)
+            }
             Divider()
         }
-        Counter()
+        RowItem(modifier = Modifier.align(alignment = CenterHorizontally)) {
+            Counter()
+        }
     }
 }
 
